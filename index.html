@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UX Research Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --charcoal: #2C2C2A;
+  --charcoal-mid: #3E3D3A;
+  --charcoal-soft: #5C5A55;
+  --sage: #7A9E8E;
+  --sage-light: #A8C4B6;
+  --sage-pale: #D6E8DF;
+  --cream: #F5F0E6;
+  --cream-warm: #EDE5D4;
+  --cream-dark: #D4C9B4;
+  --rust: #B5694A;
+  --rust-light: #D4896A;
+  --sidebar-w: 260px;
+}
+
+/* ── LAYOUT ── */
+body {
+  display: flex;
+  min-height: 100vh;
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--charcoal);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 36px 28px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-logo-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--sage);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sidebar-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.2;
+}
+.sidebar-logo-name em { font-style: italic; color: var(--sage-light); font-weight: 300; }
+
+.sidebar-section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+  padding: 20px 28px 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.04); }
+.nav-item.active {
+  background: rgba(122,158,142,0.1);
+  border-left-color: var(--sage);
+}
+.nav-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.nav-item.active .nav-num { color: var(--sage); }
+.nav-text {}
+.nav-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.3;
+}
+.nav-item.active .nav-title { color: var(--cream); }
+.nav-subtitle {
+  font-size: 10px;
+  color: rgba(255,255,255,0.22);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px 28px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--charcoal);
+  padding: 60px 64px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  top: -40%; right: -10%;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(122,158,142,0.07);
+  pointer-events: none;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: 5%;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(122,158,142,0.05);
+  pointer-events: none;
+}
+.hero-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--sage);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.15;
+  max-width: 700px;
+  margin-bottom: 18px;
+}
+.hero-title em { font-style: italic; color: var(--sage-light); }
+.hero-divider {
+  width: 48px; height: 1px;
+  background: var(--sage);
+  margin-bottom: 16px;
+}
+.hero-desc {
+  font-size: 14px;
+  color: rgba(245,240,230,0.45);
+  line-height: 1.8;
+  max-width: 560px;
+}
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+}
+.hero-meta-item {}
+.hero-meta-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero-meta-val {
+  font-size: 12px;
+  color: rgba(245,240,230,0.55);
+}
+
+/* ── RAW WORK BUTTON ── */
+.raw-work-bar {
+  background: var(--cream-warm);
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 16px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.raw-work-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--charcoal-soft);
+  text-transform: uppercase;
+}
+.raw-work-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--charcoal);
+  color: var(--cream);
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 3px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.raw-work-btn:hover { background: var(--charcoal-mid); }
+.raw-work-btn svg { opacity: 0.6; }
+.raw-work-btn-sage {
+  background: var(--sage);
+  color: var(--charcoal);
+}
+.raw-work-btn-sage:hover { background: var(--sage-light); }
+
+/* ── CONTENT BODY ── */
+.content-body {
+  padding: 56px 64px;
+}
+
+/* ── SECTION BLOCKS ── */
+.section-intro {
+  margin-bottom: 48px;
+}
+.section-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--sage);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.section-heading em { font-style: italic; color: var(--rust); font-weight: 300; }
+.section-body {
+  font-size: 14px;
+  color: var(--charcoal-soft);
+  line-height: 1.85;
+  max-width: 680px;
+}
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  border-left: 3px solid var(--sage);
+  padding: 20px 28px;
+  background: rgba(122,158,142,0.06);
+  border-radius: 0 4px 4px 0;
+  margin: 32px 0;
+}
+.pull-quote-text {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.pull-quote-attr {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--sage);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── FINDING CARDS ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+.card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 24px;
+  border-top: 3px solid var(--sage);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.card.rust { border-top-color: var(--rust); }
+.card.charcoal { border-top-color: var(--charcoal); }
+.card-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: var(--sage);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.card.rust .card-num { color: var(--rust); }
+.card.charcoal .card-num { color: var(--charcoal-soft); }
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.card-text {
+  font-size: 13px;
+  color: var(--charcoal-soft);
+  line-height: 1.7;
+}
+.card-badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(122,158,142,0.1);
+  color: var(--sage);
+}
+.card.rust .card-badge { background: rgba(181,105,74,0.1); color: var(--rust); }
+
+/* ── STAT ROW ── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--cream-dark);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.stat-cell {
+  background: #fff;
+  padding: 24px 20px;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-num.sage { color: var(--sage); }
+.stat-num.rust { color: var(--rust); }
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: var(--charcoal-soft);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* ── TWO COL ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 32px 0;
+}
+
+/* ── THEME ROWS ── */
+.theme-row {
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 20px 0;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.theme-row:first-child { padding-top: 0; }
+.theme-badge {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.badge-high { background: rgba(181,105,74,0.12); color: var(--rust); }
+.badge-med { background: rgba(122,158,142,0.12); color: var(--sage); }
+.theme-row-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.theme-row-text {
+  font-size: 13px;
+  color: var(--charcoal-soft);
+  line-height: 1.6;
+}
+
+/* ── OBSERVATION BLOCKS ── */
+.obs-block {
+  background: #fff;
+  border-radius: 4px;
+  padding: 28px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: start;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.obs-num-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(44,44,42,0.08);
+  line-height: 1;
+}
+.obs-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.obs-stat.sage { color: var(--sage); }
+.obs-stat.rust { color: var(--rust); }
+.obs-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--charcoal-soft);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.obs-text { font-size: 13px; color: var(--charcoal-soft); line-height: 1.7; }
+
+/* ── PROCESS STEPS ── */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  background: var(--cream-dark);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.process-step {
+  background: #fff;
+  padding: 24px 18px;
+  border-right: 1px solid var(--cream-dark);
+  position: relative;
+}
+.process-step:last-child { border-right: none; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(44,44,42,0.08);
+  margin-bottom: 8px;
+}
+.step-title {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.step-text { font-size: 11px; color: var(--charcoal-soft); line-height: 1.6; }
+
+/* ── HOME PAGE SPECIFIC ── */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+.home-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 32px;
+  border-left: 3px solid var(--sage);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  text-decoration: none;
+  display: block;
+}
+.home-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.home-card.rust { border-left-color: var(--rust); }
+.home-card.charcoal-b { border-left-color: var(--charcoal); }
+.home-card-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: var(--sage);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.home-card.rust .home-card-num { color: var(--rust); }
+.home-card.charcoal-b .home-card-num { color: var(--charcoal-soft); }
+.home-card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.home-card-text { font-size: 13px; color: var(--charcoal-soft); line-height: 1.7; }
+.home-card-arrow {
+  margin-top: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--sage);
+  letter-spacing: 1px;
+}
+.home-card.rust .home-card-arrow { color: var(--rust); }
+
+/* ── THESIS BLOCK ── */
+.thesis-block {
+  background: var(--charcoal);
+  border-radius: 4px;
+  padding: 48px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+.thesis-block::after {
+  content: '"';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 200px;
+  color: rgba(122,158,142,0.06);
+  top: -20px; left: 20px;
+  line-height: 1;
+  pointer-events: none;
+}
+.thesis-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--sage);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.thesis-text {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.5;
+  max-width: 680px;
+  position: relative;
+  z-index: 1;
+}
+.thesis-text strong { font-weight: 700; font-style: normal; color: var(--sage-light); }
+
+/* ── SECTION DIVIDER ── */
+.sec-div {
+  height: 1px;
+  background: var(--cream-dark);
+  margin: 48px 0;
+}
+
+/* ── INLINE LINK ── */
+.inline-link {
+  color: var(--sage);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(122,158,142,0.3);
+  font-size: 13px;
+}
+.inline-link:hover { border-bottom-color: var(--sage); }
+
+/* ── RECOMMENDATION ROW ── */
+.rec-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.rec-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.rec-title { font-weight: 600; font-size: 14px; color: var(--charcoal); margin-bottom: 4px; }
+.rec-text { font-size: 13px; color: var(--charcoal-soft); line-height: 1.7; }
+
+/* ── TAG ROW ── */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.tag {
+  background: rgba(122,158,142,0.1);
+  border: 1px solid rgba(122,158,142,0.2);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: var(--sage);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── STORYBOARD IMG ── */
+.storyboard-img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--cream-dark);
+  margin: 24px 0;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(122,158,142,0.3); border-radius: 2px; }
+
+</style>
+</head>
+<body>
+
+<!-- ===================== SIDEBAR ===================== -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-kicker">UX Research Portfolio</div>
+    <div class="sidebar-logo-name">Your Name<br><em>2026</em></div>
+  </div>
+
+  <div class="sidebar-section-label">Navigation</div>
+
+  <a class="nav-item active" onclick="showPage('home')" href="#">
+    <div class="nav-num">00</div>
+    <div class="nav-text">
+      <div class="nav-title">Overview</div>
+      <div class="nav-subtitle">Portfolio introduction & thesis</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('interviews')" href="#">
+    <div class="nav-num">01</div>
+    <div class="nav-text">
+      <div class="nav-title">Empathy Interviews</div>
+      <div class="nav-subtitle">Posh App · Digital Research</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('persona')" href="#">
+    <div class="nav-num">02</div>
+    <div class="nav-text">
+      <div class="nav-title">Empathy Map & User Persona</div>
+      <div class="nav-subtitle">Kate Bon · Posh App</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('thematic')" href="#">
+    <div class="nav-num">03</div>
+    <div class="nav-text">
+      <div class="nav-title">Thematic Coding</div>
+      <div class="nav-subtitle">6 Themes · 16 Data Points</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('ethnography')" href="#">
+    <div class="nav-num">04</div>
+    <div class="nav-text">
+      <div class="nav-title">Ethnographic Research</div>
+      <div class="nav-subtitle">Lake Baldwin Park · Physical</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('casestudy')" href="#">
+    <div class="nav-num">05</div>
+    <div class="nav-text">
+      <div class="nav-title">Case Study Critique</div>
+      <div class="nav-subtitle">PlanBit · Habit App</div>
+    </div>
+  </a>
+
+  <a class="nav-item" onclick="showPage('synthesis')" href="#">
+    <div class="nav-num">06</div>
+    <div class="nav-text">
+      <div class="nav-title">Cross-Study Synthesis</div>
+      <div class="nav-subtitle">The connective thread</div>
+    </div>
+  </a>
+
+  <div class="sidebar-footer">
+    UX Research · 2026<br>
+    Posh App · Lake Baldwin<br>
+    Central Florida
+  </div>
+</nav>
+
+<!-- ===================== MAIN ===================== -->
+<div class="main">
+
+  <!-- ══════════════ HOME ══════════════ -->
+  <div class="page active" id="page-home">
+    <div class="page-hero">
+      <div class="hero-kicker">UX Research Portfolio · 2026</div>
+      <div class="hero-title">Where <em>intention</em> meets environment — and what breaks between.</div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">A dual-method research study across a digital event platform and a public urban park — exploring why people show up ready, and leave unfulfilled. This portfolio showcases research conducted through empathy interviews, ethnographic observation, persona mapping, thematic coding, and case study critique.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Studies</div>
+          <div class="hero-meta-val">2 Research Projects</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Methods</div>
+          <div class="hero-meta-val">5 Distinct Approaches</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Domain</div>
+          <div class="hero-meta-val">Digital + Physical</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Focus</div>
+          <div class="hero-meta-val">Young Women · Central FL</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="thesis-block">
+        <div class="thesis-kicker">The Research Thesis</div>
+        <div class="thesis-text">The problem is never a <strong>lack of desire</strong>. It is always a failure of the <strong>environment to meet it</strong> — whether that environment is an app or a park.</div>
+      </div>
+
+      <div class="section-kicker">Explore the Work</div>
+      <div class="section-heading">Five methods. <em>One researcher.</em></div>
+
+      <div class="home-grid">
+        <a class="home-card" onclick="showPage('interviews')" href="#">
+          <div class="home-card-num">01 — Digital Research</div>
+          <div class="home-card-title">Empathy Interviews</div>
+          <div class="home-card-text">Semi-structured interviews with active Posh users aged 18–24, conducted via FaceTime. Secondary research first, then deep listening.</div>
+          <div class="home-card-arrow">View research →</div>
+        </a>
+        <a class="home-card" onclick="showPage('persona')" href="#">
+          <div class="home-card-num">02 — Synthesis</div>
+          <div class="home-card-title">Empathy Map & User Persona</div>
+          <div class="home-card-text">Kate Bon — a 20-year-old student and barista navigating event discovery on Posh. A full persona and empathy map grounded in real interview data.</div>
+          <div class="home-card-arrow">View persona →</div>
+        </a>
+        <a class="home-card rust" onclick="showPage('thematic')" href="#">
+          <div class="home-card-num">03 — Analysis</div>
+          <div class="home-card-title">Thematic Coding</div>
+          <div class="home-card-text">6 themes. 16 data points. 5 research phases. A rigorous qualitative analysis tracing every quote to a design direction.</div>
+          <div class="home-card-arrow">View analysis →</div>
+        </a>
+        <a class="home-card rust" onclick="showPage('ethnography')" href="#">
+          <div class="home-card-num">04 — Physical Research</div>
+          <div class="home-card-title">Ethnographic Research</div>
+          <div class="home-card-text">Field observation at Lake Baldwin Park in Orlando — watching what people endure, what they abandon, and what they keep trying for anyway.</div>
+          <div class="home-card-arrow">View ethnography →</div>
+        </a>
+        <a class="home-card charcoal-b" onclick="showPage('casestudy')" href="#">
+          <div class="home-card-num">05 — Critique</div>
+          <div class="home-card-title">Case Study Critique</div>
+          <div class="home-card-text">A critical analysis of PlanBit — a habit-tracking app — examining user research rigor, design coherence, and the gaps that separate good work from great work.</div>
+          <div class="home-card-arrow">View critique →</div>
+        </a>
+        <a class="home-card charcoal-b" onclick="showPage('synthesis')" href="#">
+          <div class="home-card-num">06 — Insight</div>
+          <div class="home-card-title">Cross-Study Synthesis</div>
+          <div class="home-card-text">Two environments. Two studies. One repeated finding. The connective thread that ties all the work together into a single research argument.</div>
+          <div class="home-card-arrow">View synthesis →</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ INTERVIEWS ══════════════ -->
+  <div class="page" id="page-interviews">
+    <div class="page-hero">
+      <div class="hero-kicker">01 — Digital Research · Posh App</div>
+      <div class="hero-title">Empathy <em>Interviews</em></div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">Semi-structured interviews with active Posh users, preceded by secondary research across App Store reviews, Trustpilot, and social media. Two interviews conducted via FaceTime, recorded with Granola for transcription.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Method</div><div class="hero-meta-val">Qualitative Interviews</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Participants</div><div class="hero-meta-val">2 · Ages 18–20 · Female</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Platform</div><div class="hero-meta-val">FaceTime · Remote</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Tool</div><div class="hero-meta-val">Granola (transcription)</div></div>
+      </div>
+    </div>
+
+    <div class="raw-work-bar">
+      <div class="raw-work-label">View the full assignment in its original form</div>
+      <a href="https://claude.ai/public/artifacts/423eb50a-9057-4a4b-891f-aba69c79bc3d" target="_blank" class="raw-work-btn raw-work-btn-sage">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h8v8M10 2L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Open Raw Assignment ↗
+      </a>
+    </div>
+
+    <div class="content-body">
+      <div class="section-intro">
+        <div class="section-kicker">Research Context</div>
+        <div class="section-heading">Listening before <em>asking.</em></div>
+        <div class="section-body">Before composing a single interview question, secondary research was conducted across Trustpilot, Google Play, the Apple App Store, and social media — uncovering recurring themes that shaped the interview guide. This approach ensured questions were specific and grounded, not generic.</div>
+      </div>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">"You're going blind. You're unaware about what's going on. You just get your ticket. That's it."</div>
+        <div class="pull-quote-attr">— Interview Participant, Age 20 · Posh App User</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">The Interview Setting</div>
+      <div class="section-heading">Context shapes <em>candor.</em></div>
+      <div class="section-body" style="margin-bottom:20px">The interview was conducted at 6PM — when daylight fades and a college campus shifts toward the night. The participant entered a library soundproof room. The researcher was at home, at a desk. Even through a screen, nonverbal cues were present: leaning forward on strong points, raised eyebrows at suspicious content, gaze averted to find words for frustrating memories.</div>
+      <div class="section-body">The strategy was to listen more than talk — using transitional phrases like "that actually brings me to my next question" to follow momentum without interrupting flow. A neutral, inquisitive tone was held throughout. No agreement or criticism was expressed.</div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Key Quotes</div>
+      <div class="section-heading">In their <em>own words.</em></div>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">"I'm not going to some event that I have no idea about. I don't know who's going. It's different for me because I even worry about my safety."</div>
+        <div class="pull-quote-attr">— Interview 1 · Safety & Trust</div>
+      </div>
+
+      <div class="pull-quote" style="border-left-color: var(--rust)">
+        <div class="pull-quote-text">"I look for events on Posh, and then I get them on Plots."</div>
+        <div class="pull-quote-attr">— Interview 1 · Platform Switching</div>
+      </div>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">"There's no way to tell if an event is actually good just from looking at it — no ratings, no comments, nothing."</div>
+        <div class="pull-quote-attr">— Interview 2 · Transparency Gap</div>
+      </div>
+
+      <div class="pull-quote" style="border-left-color: var(--rust)">
+        <div class="pull-quote-text">"If Posh added that community layer, I'd use it a lot more. Right now I only keep it because it has a wide event catalog."</div>
+        <div class="pull-quote-attr">— Interview 2 · Unfulfilled Desire</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Analysis</div>
+      <div class="section-heading">Three themes <em>surfaced.</em></div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-num">Theme 01</div>
+          <div class="card-title">Transparency</div>
+          <div class="card-text">Users need to feel informed before making a commitment. Knowing the price, the crowd, and the venue reality are not luxuries — they are prerequisites for this demographic.</div>
+          <div class="card-badge">High Priority</div>
+        </div>
+        <div class="card rust">
+          <div class="card-num">Theme 02</div>
+          <div class="card-title">Safety</div>
+          <div class="card-text">Both interviewees are young women navigating unfamiliar venues at night. Posh offers no community layer, no attendee visibility. Users stitch context from Instagram and friends.</div>
+          <div class="card-badge">High Priority</div>
+        </div>
+        <div class="card charcoal">
+          <div class="card-num">Theme 03</div>
+          <div class="card-title">Technical Reliability</div>
+          <div class="card-text">Tickets fail at venue doors. Profiles refuse to upload. The app feels unfinished relative to competitors — and one crash destroys all trust built during purchase.</div>
+          <div class="card-badge">High Priority</div>
+        </div>
+      </div>
+
+      <div class="section-body" style="margin-top:16px">The most unexpected revelation was emotional rather than factual: beneath the frustration was <em>unfulfilled desire</em>, not disengagement. She wanted a better app. That conflict between optimism and disappointment is the exact signal excellent design is meant to respond to.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ PERSONA ══════════════ -->
+  <div class="page" id="page-persona">
+    <div class="page-hero">
+      <div class="hero-kicker">02 — Synthesis · Posh App</div>
+      <div class="hero-title">Empathy Map <em>&</em> User Persona</div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">Kate Bon — a 20-year-old student and barista in Central Florida. A group buyer who never purchases alone. Her core question before any event: "Will this actually be worth it — and are my people going?"</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Persona</div><div class="hero-meta-val">Kate Bon, Age 20</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Role</div><div class="hero-meta-val">Student & Barista</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Location</div><div class="hero-meta-val">Central Florida</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Type</div><div class="hero-meta-val">Group Buyer</div></div>
+      </div>
+    </div>
+
+    <div class="raw-work-bar">
+      <div class="raw-work-label">View the full Empathy Map & Persona — both themes — in its original form</div>
+      <a href="https://claude.ai/public/artifacts/82c85a82-3a4f-43a1-9271-cc11c5bef4b1" target="_blank" class="raw-work-btn raw-work-btn-sage">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h8v8M10 2L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Open Raw Assignment ↗
+      </a>
+    </div>
+
+    <div class="content-body">
+      <div class="section-intro">
+        <div class="section-kicker">The Persona</div>
+        <div class="section-heading">Kate Bon — <em>she never buys alone.</em></div>
+        <div class="section-body">Kate is a 20-year-old student and barista who browses Posh every evening but almost always discovers events via Instagram or friends first. She drops event links into group chats, waits for reactions, checks who else is going — and only then considers buying. Hidden fees at checkout and app crashes destroy her trust immediately.</div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="section-kicker" style="margin-bottom:12px">Needs & Goals</div>
+          <div class="cards-grid" style="grid-template-columns:1fr 1fr; gap:10px; margin:0">
+            <div class="card" style="padding:16px">
+              <div class="card-num">Vibe</div>
+              <div class="card-text" style="font-size:12px">Events that actually match her aesthetic</div>
+            </div>
+            <div class="card" style="padding:16px">
+              <div class="card-num">Trust</div>
+              <div class="card-text" style="font-size:12px">See who's attending before committing</div>
+            </div>
+            <div class="card" style="padding:16px">
+              <div class="card-num">Pricing</div>
+              <div class="card-text" style="font-size:12px">No hidden fees, ever</div>
+            </div>
+            <div class="card" style="padding:16px">
+              <div class="card-num">Discovery</div>
+              <div class="card-text" style="font-size:12px">Beyond nightlife — mixers, pop-ups, more</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-kicker" style="margin-bottom:12px">Frustrations</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="rec-row" style="padding:12px 0"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title" style="font-size:13px">Hidden fees only visible at final checkout</div></div></div>
+            <div class="rec-row" style="padding:12px 0"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title" style="font-size:13px">App crashes mid-purchase</div></div></div>
+            <div class="rec-row" style="padding:12px 0"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title" style="font-size:13px">Listings that don't match reality</div></div></div>
+            <div class="rec-row" style="padding:12px 0"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title" style="font-size:13px">Zero customer support when things go wrong</div></div></div>
+            <div class="rec-row" style="padding:12px 0;border:none"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title" style="font-size:13px">No way to flag sketchy organizers</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Empathy Map</div>
+      <div class="section-heading">What she sees, hears, <em>feels.</em></div>
+
+      <div class="cards-grid" style="grid-template-columns:1fr 1fr">
+        <div class="card">
+          <div class="card-num">What She Sees</div>
+          <div class="card-text">Event-packed social feeds · Group chats buzzing with links · Fees that only appear at the very last checkout step · "Is this worth it? Will my friends actually come?"</div>
+        </div>
+        <div class="card">
+          <div class="card-num">What She Hears</div>
+          <div class="card-text">"Is everyone going?" — constantly from her circle · Friends venting about glitchy apps · "Did you buy tickets yet?" — FOMO pressure · "I want something real."</div>
+        </div>
+        <div class="card rust">
+          <div class="card-num">What She Says & Does</div>
+          <div class="card-text">Drops events into group chats and waits · Reads reviews before buying · Never buys alone — always coordinates 1–2 friends first · Screenshots events across platforms</div>
+        </div>
+        <div class="card rust">
+          <div class="card-num">What She Thinks & Feels</div>
+          <div class="card-text">"Will my friends bail at the last second?" · Craves events that feel safe and authentic · Anxious about surprise fees · Loses trust when listings mislead her</div>
+        </div>
+      </div>
+
+      <div class="pull-quote" style="margin-top:32px">
+        <div class="pull-quote-text">The persona was built from two themes that emerged across both interviews: the desire for social certainty before commitment, and the fear that the environment — digital or physical — will let her down.</div>
+        <div class="pull-quote-attr">— Researcher Reflection</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ THEMATIC ══════════════ -->
+  <div class="page" id="page-thematic">
+    <div class="page-hero">
+      <div class="hero-kicker">03 — Analysis · Posh App</div>
+      <div class="hero-title">Thematic <em>Coding</em></div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">A rigorous five-phase qualitative analysis of two user interviews — moving from close reading to initial coding, cluster grouping, theme formation, and refinement. 6 themes. 16 data points. Zero guesswork.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Themes</div><div class="hero-meta-val">6 Distinct</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Data Points</div><div class="hero-meta-val">16 Coded Quotes</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Phases</div><div class="hero-meta-val">5 Research Phases</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Interviews</div><div class="hero-meta-val">2 Participants</div></div>
+      </div>
+    </div>
+
+    <div class="raw-work-bar">
+      <div class="raw-work-label">View the full Thematic Coding report — available in two visual themes</div>
+      <div style="display:flex;gap:10px">
+        <a href="#" class="raw-work-btn" style="opacity:0.5;cursor:default">Gold Version (upload)</a>
+        <a href="#" class="raw-work-btn raw-work-btn-sage" style="opacity:0.5;cursor:default">Neon Version (upload)</a>
+      </div>
+    </div>
+
+    <div class="content-body">
+
+      <div class="section-kicker">The Research Process</div>
+      <div class="section-heading">5 Phases. 1 Mission. <em>Zero Guesswork.</em></div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Close Reading</div>
+          <div class="step-text">Immersed in both transcripts — every phrase, emotion, and moment that carried weight was flagged.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Initial Coding</div>
+          <div class="step-text">Each meaningful segment tagged with a precise 2–4 word label. No interpretation yet — just observation.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Clustering</div>
+          <div class="step-text">Codes pulled together by shared meaning. Patterns began surfacing from the raw language.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Theme Formation</div>
+          <div class="step-text">Six distinct themes named. Each one grounded in real user words — a signal, not an assumption.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">05</div>
+          <div class="step-title">Refinement</div>
+          <div class="step-text">One insight sentence written per quote — tracing each data point directly to design direction.</div>
+        </div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">The Findings</div>
+      <div class="section-heading">6 themes <em>emerged from the data.</em></div>
+      <div class="section-body" style="margin-bottom:28px">Every theme is anchored to a direct user quote. Nothing assumed. Everything heard.</div>
+
+      <div class="theme-row">
+        <div class="theme-badge badge-high">High</div>
+        <div>
+          <div class="theme-row-title">Tool Not a Destination</div>
+          <div class="theme-row-text">Users arrive with a task, complete it, and leave. There's no pull to stay, browse, or return. Posh functions like Google for events — not a community.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-badge badge-high">High</div>
+        <div>
+          <div class="theme-row-title">Social Transparency & Crowd Visibility</div>
+          <div class="theme-row-text">Buying a ticket means buying into a crowd — but Posh shows users nothing about who's going. Plots already solves this, and it's taking users.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-badge badge-high">High</div>
+        <div>
+          <div class="theme-row-title">Safety & Trust</div>
+          <div class="theme-row-text">For young women, an unknown event is a perceived physical risk — not a social inconvenience. This distinction is critical for this demographic.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-badge badge-high">High</div>
+        <div>
+          <div class="theme-row-title">Technical Reliability</div>
+          <div class="theme-row-text">The app fails at the single most critical moment: the venue door. One crash destroys all trust built during the purchase experience.</div>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-badge badge-med">Med</div>
+        <div>
+          <div class="theme-row-title">UI/UX & App Experience</div>
+          <div class="theme-row-text">The interface feels like a database. Users expect the energy of TikTok — they get a spreadsheet. No visual pull to stay.</div>
+        </div>
+      </div>
+      <div class="theme-row" style="border:none">
+        <div class="theme-badge badge-med">Med</div>
+        <div>
+          <div class="theme-row-title">Personalization & Social Identity</div>
+          <div class="theme-row-text">Users want to be people, not anonymous transactions. A profile transforms the app from a vending machine into a community.</div>
+        </div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">3 Non-Negotiables</div>
+      <div class="section-heading">What the data <em>demands.</em></div>
+
+      <div class="rec-row">
+        <div class="rec-dot"></div>
+        <div>
+          <div class="rec-title">Safety Is a Feature, Not a Footnote</div>
+          <div class="rec-text">Young women will not use a platform they cannot trust. Crowd transparency, verified organizers, and privacy controls are not optional — they are table stakes for this demographic. Design for safety first. Everything else follows.</div>
+        </div>
+      </div>
+      <div class="rec-row">
+        <div class="rec-dot" style="background:var(--rust)"></div>
+        <div>
+          <div class="rec-title">The Social Layer Is the Product</div>
+          <div class="rec-text">Posh is losing users to Plots for exactly one reason: social visibility. Until users can see who is going before they buy, the app will always be a stepping stone rather than a destination. The social layer is not a feature — it is the entire product.</div>
+        </div>
+      </div>
+      <div class="rec-row" style="border:none">
+        <div class="rec-dot" style="background:var(--charcoal-mid)"></div>
+        <div>
+          <div class="rec-title">Reliability at the Door Is Non-Negotiable</div>
+          <div class="rec-text">One app failure at the venue entrance destroys every ounce of trust built during the purchase experience. Offline ticket caching isn't a nice-to-have — it's a trust mechanism. The most stressful moment of the night must become the smoothest.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ETHNOGRAPHY ══════════════ -->
+  <div class="page" id="page-ethnography">
+    <div class="page-hero">
+      <div class="hero-kicker">04 — Physical Research · Orlando, FL</div>
+      <div class="hero-title">Ethnographic <em>Research</em></div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">Field observation at Lake Baldwin Park — blending into the environment, watching people arrive ready to stay, and documenting the exact moments the space fails them. Qualitative field notes combined with quantitative counts of amenities and visitor patterns.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Location</div><div class="hero-meta-val">Lake Baldwin Park, Orlando</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Method</div><div class="hero-meta-val">Ethnographic Observation</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Duration</div><div class="hero-meta-val">90-min Saturday visits</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Data</div><div class="hero-meta-val">Qualitative + Quantitative</div></div>
+      </div>
+    </div>
+
+    <div class="raw-work-bar">
+      <div class="raw-work-label">The full ethnographic report — raw assignment</div>
+      <a href="#" class="raw-work-btn" style="opacity:0.4;cursor:default">
+        Full Report (attach PDF to link)
+      </a>
+    </div>
+
+    <div class="content-body">
+
+      <div class="section-intro">
+        <div class="section-kicker">The Research Question</div>
+        <div class="section-heading">How do visitors <em>actually use</em> this space?</div>
+        <div class="section-body">How do visitors in Lake Baldwin Park utilize the outdoor recreational space to meet their physical, social, and wellness needs — and what design changes could better encourage ongoing, stationary activities? The focus was specifically on those who arrive intending to stay: the reader, the yogi, the meditator. The ones who are not joggers passing through, but people trying to be still in a space not designed for stillness.</div>
+      </div>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">Driving up to the park, the first thing that hits is the sound — like a natural playlist mixing with city noise. But near the overflowing trash bins, the smell hits immediately. What strikes me most is the contrast between motion and pause.</div>
+        <div class="pull-quote-attr">— Field Notes, Lake Baldwin Park</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Observations & Findings</div>
+      <div class="section-heading">Three moments <em>of failure.</em></div>
+
+      <div class="obs-block">
+        <div class="obs-num-big">01</div>
+        <div>
+          <div class="obs-stat sage">12 min</div>
+          <div class="obs-label">Average time before abandonment · Environmental discomfort</div>
+          <div class="obs-text">Time and again, people settled in with books or yoga mats — genuinely wanting to spend quality time in the park — only to abandon their spots within 10–15 minutes due to relentless mosquitoes. One woman's yoga practice lasted just twelve minutes before the insects won. The spacious grassy field, which could accommodate so many activities, remained almost completely empty.</div>
+        </div>
+      </div>
+
+      <div class="stat-row" style="margin:16px 0 28px">
+        <div class="stat-cell"><div class="stat-num sage">4</div><div class="stat-label">Shade structures total (0 in grassy field)</div></div>
+        <div class="stat-cell"><div class="stat-num">45–60</div><div class="stat-label">People in park during observation</div></div>
+        <div class="stat-cell"><div class="stat-num rust">3–4</div><div class="stat-label">People actually in open grassy areas</div></div>
+      </div>
+
+      <div class="obs-block">
+        <div class="obs-num-big">02</div>
+        <div>
+          <div class="obs-stat rust">3 / 6</div>
+          <div class="obs-label">Waste stations overflowing · Inadequate waste management</div>
+          <div class="obs-text">Dog owners approached dispensers only to find them empty, forced to search their pockets for personal bags — and when they came up short, the frustration and dilemma was visible on their faces. Overfilled bins created "avoidance zones" where the smell, detectable from 10–15 feet away, pushed people away from otherwise beautiful spots by the pond.</div>
+        </div>
+      </div>
+
+      <div class="stat-row" style="margin:16px 0 28px">
+        <div class="stat-cell"><div class="stat-num">6</div><div class="stat-label">Total waste stations in park</div></div>
+        <div class="stat-cell"><div class="stat-num rust">3</div><div class="stat-label">Appearing overflowing</div></div>
+        <div class="stat-cell"><div class="stat-num">20–25</div><div class="stat-label">Dogs observed during 90-min visit</div></div>
+      </div>
+
+      <div class="obs-block">
+        <div class="obs-num-big">03</div>
+        <div>
+          <div class="obs-stat">9 / 11</div>
+          <div class="obs-label">Benches occupied at peak · Infrastructure doesn't support stillness</div>
+          <div class="obs-text">The park welcomes movement but unintentionally excludes stillness. Fitness enthusiasts improvised workouts — benches for tricep dips, tree branches for pull-ups. During peak hours, one woman searched for an open bench, checking three before leaving entirely, her quiet afternoon derailed by lack of seating.</div>
+        </div>
+      </div>
+
+      <div class="stat-row" style="margin:16px 0 28px">
+        <div class="stat-cell"><div class="stat-num">11</div><div class="stat-label">Total benches in park</div></div>
+        <div class="stat-cell"><div class="stat-num rust">1</div><div class="stat-label">Bench in the open grassy field</div></div>
+        <div class="stat-cell"><div class="stat-num">2</div><div class="stat-label">Water fountains</div></div>
+        <div class="stat-cell"><div class="stat-num rust">0</div><div class="stat-label">Fitness equipment installed</div></div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Recommendations</div>
+      <div class="section-heading">Meeting visitors <em>where they already are.</em></div>
+
+      <div class="rec-row"><div class="rec-dot"></div><div><div class="rec-title">Solar-powered mosquito control + citronella/lavender landscaping near seating</div><div class="rec-text">Would allow that yoga practitioner to finally complete her routine in peace.</div></div></div>
+      <div class="rec-row"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title">Expand waste stations from 6 to 12 with smart monitoring</div><div class="rec-text">Removes the impossible choice dog owners face between responsibility and convenience.</div></div></div>
+      <div class="rec-row"><div class="rec-dot"></div><div><div class="rec-title">Outdoor gym installations in the open field</div><div class="rec-text">Validates the creativity of people improvising workouts — gives them infrastructure that matches their dedication.</div></div></div>
+      <div class="rec-row" style="border:none"><div class="rec-dot" style="background:var(--charcoal-mid)"></div><div><div class="rec-title">Shade structures + water features in the grassy field</div><div class="rec-text">Could finally fulfill the field's potential — making the entire park accessible regardless of how visitors choose to engage.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CASE STUDY ══════════════ -->
+  <div class="page" id="page-casestudy">
+    <div class="page-hero">
+      <div class="hero-kicker">05 — Critique · PlanBit Habit App</div>
+      <div class="hero-title">Case Study <em>Critique</em></div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">A critical analysis of the PlanBit case study — a habit-tracking app developed in four weeks with General Assembly. Examined across four dimensions: user research, information architecture, visual design, and evaluation & iteration.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Subject</div><div class="hero-meta-val">PlanBit Habit App</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Dimensions</div><div class="hero-meta-val">4 Areas of Analysis</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Framework</div><div class="hero-meta-val">Hook Model · UX Critique</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Timeline</div><div class="hero-meta-val">4-Week Sprint</div></div>
+      </div>
+    </div>
+
+    <div class="raw-work-bar">
+      <div class="raw-work-label">View the full Case Study Critique — raw assignment</div>
+      <a href="#" class="raw-work-btn" style="opacity:0.4;cursor:default">
+        Full Report (attach link)
+      </a>
+    </div>
+
+    <div class="content-body">
+      <div class="section-intro">
+        <div class="section-kicker">The Subject</div>
+        <div class="section-heading">PlanBit — <em>habit as emotion, not logistics.</em></div>
+        <div class="section-body">PlanBit is a habit-tracking app built around a digital garden metaphor: when you maintain a habit, your garden flourishes; neglect causes it to wither. This team saw habit formation as an emotional problem in a market full of apps treating it as a logistical one. The critique examines how well the case study documents and supports that insight.</div>
+      </div>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">As you grow, so does the garden. When you slip, it suffers. It greets your return. It's not a set of features. That is a relationship — and the ultimate goal of user-centered design is to build for that distinction.</div>
+        <div class="pull-quote-attr">— Case Study Critique</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">What Works</div>
+      <div class="section-heading">Strengths <em>worth recognizing.</em></div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-num">Research</div>
+          <div class="card-title">Multi-Method Rigor</div>
+          <div class="card-text">Hook Model foundation, competitive analysis of 6 apps, 20+ interviews with graduates and early professionals. The research phase outperforms most 4-week projects.</div>
+          <div class="card-badge">Strong</div>
+        </div>
+        <div class="card">
+          <div class="card-num">Narrative</div>
+          <div class="card-title">Intellectual Coherence</div>
+          <div class="card-text">The Hook Model introduced on page one becomes the reward loop visible on the last screen. Persona pain points recur in every major design decision. Rare coherence.</div>
+          <div class="card-badge">Strong</div>
+        </div>
+        <div class="card rust">
+          <div class="card-num">Iteration</div>
+          <div class="card-title">Candid Reflection</div>
+          <div class="card-text">The team acknowledged spending 80% of time on literature research that turned out less relevant than user interviews. That kind of honesty gives the case study legitimacy.</div>
+          <div class="card-badge">Authentic</div>
+        </div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Gaps Identified</div>
+      <div class="section-heading">What the critique <em>surfaced.</em></div>
+
+      <div class="rec-row"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title">No longitudinal validation</div><div class="rec-text">The core hypothesis — that a growing visual garden sustains motivation over time — is never tested. The most important question the study raised remains unanswered.</div></div></div>
+      <div class="rec-row"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title">Visual exploration underdocumented</div><div class="rec-text">The final visual identity is unique and deliberate, but the process that led to it is invisible. No mood boards, no rejected directions, no explanation of why the garden over other metaphors.</div></div></div>
+      <div class="rec-row"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title">Usability testing lacks demographic context</div><div class="rec-text">Five rounds of testing are described, but participant demographics, recruitment methods, and whether participants were consistent across rounds are never disclosed.</div></div></div>
+      <div class="rec-row" style="border:none"><div class="rec-dot" style="background:var(--rust)"></div><div><div class="rec-title">No accessibility consideration</div><div class="rec-text">No mention of contrast ratios, touch target sizing, screen reader support, or reduced-motion settings — significant oversight for a wellness app targeting users who may include people with ADHD, anxiety, or visual processing differences.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SYNTHESIS ══════════════ -->
+  <div class="page" id="page-synthesis">
+    <div class="page-hero">
+      <div class="hero-kicker">06 — Cross-Study Insight</div>
+      <div class="hero-title">The <em>Connective Thread</em></div>
+      <div class="hero-divider"></div>
+      <div class="hero-desc">Two environments. Two studies. One repeated finding. The through-line that unites the Posh empathy interviews, the Lake Baldwin ethnography, and the PlanBit critique into a single, unified research argument.</div>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="hero-meta-label">Studies</div><div class="hero-meta-val">2 Primary + 1 Critique</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Methods</div><div class="hero-meta-val">Digital + Physical</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-label">Finding</div><div class="hero-meta-val">Intention vs. Environment</div></div>
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="thesis-block">
+        <div class="thesis-kicker">The Research Thesis</div>
+        <div class="thesis-text">The problem is never a <strong>lack of desire</strong>. It is always a failure of the <strong>environment to meet it</strong> — whether that environment is an app, a park, or a habit system.</div>
+      </div>
+
+      <div class="section-kicker" style="margin-top:40px">Study One</div>
+      <div class="section-heading">Posh — <em>she arrives ready to commit.</em></div>
+      <div class="section-body">Kate opens the app with genuine intention to find something that matches her energy, buy a ticket, and show up with her people. Hidden fees, no social proof, a crashing app, and no community layer push her back out the door before she ever gets there. The intention was real. The environment failed it.</div>
+
+      <div class="pull-quote" style="margin:24px 0">
+        <div class="pull-quote-text">"I look for events on Posh, and then I get them on Plots."</div>
+        <div class="pull-quote-attr">— The clearest signal that intention survived, but the platform didn't.</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">Study Two</div>
+      <div class="section-heading">Lake Baldwin — <em>she arrives ready to stay.</em></div>
+      <div class="section-body">The park visitor packs a book, finds the perfect afternoon, and arrives with every intention of staying. Mosquitoes end her visit in 12 minutes. A full grassy field — with not a single shade structure — remains empty. One woman checks three benches before leaving entirely. The intention was real. The environment failed it.</div>
+
+      <div class="pull-quote" style="margin:24px 0; border-left-color:var(--rust)">
+        <div class="pull-quote-text">It's not enough to count benches or measure distances — you have to see the disappointment on someone's face when they can't find a place to sit.</div>
+        <div class="pull-quote-attr">— Ethnographic Field Notes, Lake Baldwin Park</div>
+      </div>
+
+      <div class="sec-div"></div>
+
+      <div class="section-kicker">What This Demonstrates</div>
+      <div class="section-heading">Two methods. <em>One researcher.</em></div>
+      <div class="section-body" style="margin-bottom:20px">The value of this portfolio is not just in the findings themselves — it's in the range of methods used to reach them. Empathy interviews surface what users say and feel. Ethnographic observation captures what they do and endure. Thematic coding traces the pattern from raw language to design direction. Case study critique identifies the gap between a good project and a rigorous one.</div>
+
+      <div class="tag-row">
+        <div class="tag">Empathy Interviews</div>
+        <div class="tag">Ethnographic Observation</div>
+        <div class="tag">Persona Mapping</div>
+        <div class="tag">Empathy Mapping</div>
+        <div class="tag">Thematic Coding</div>
+        <div class="tag">Field Notes</div>
+        <div class="tag">Qualitative Analysis</div>
+        <div class="tag">Case Study Critique</div>
+        <div class="tag">Quantitative Counting</div>
+        <div class="tag">Rich Description</div>
+        <div class="tag">Secondary Research</div>
+        <div class="tag">Synthesis</div>
+      </div>
+
+      <div class="thesis-block" style="margin-top:40px">
+        <div class="thesis-kicker">Closing Statement</div>
+        <div class="thesis-text">Great design begins with deep human understanding. Not assumptions — <strong>truth</strong>. Not abstract user groups — <strong>real people</strong> deserving spaces that serve them.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+function showPage(id) {
+  // hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  // show target
+  const page = document.getElementById('page-' + id);
+  if (page) { page.classList.add('active'); window.scrollTo(0,0); }
+
+  // highlight nav
+  const navItems = document.querySelectorAll('.nav-item');
+  const pageOrder = ['home','interviews','persona','thematic','ethnography','casestudy','synthesis'];
+  const idx = pageOrder.indexOf(id);
+  if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
+}
+
+// prevent default on all nav links
+document.querySelectorAll('.nav-item, .home-card').forEach(el => {
+  el.addEventListener('click', function(e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>
